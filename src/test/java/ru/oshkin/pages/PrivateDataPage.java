@@ -2,43 +2,61 @@ package ru.oshkin.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.FindBy;
 
-import static java.lang.String.format;
-import static ru.oshkin.old.TestData.*;
-import static ru.oshkin.old.TestData.DATE_OF_BIRTH;
-import static ru.oshkin.old.TestLocatorsData.*;
-import static ru.oshkin.old.TestLocatorsData.DATE_OF_BIRTH_LOCATOR;
+import java.util.concurrent.TimeUnit;
 
 public class PrivateDataPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(PrivateDataPage.class.getName());
 
-    private void setPrivateDataInfo() {
-        findElemSetValue(NAME_LOCATOR, NAME, "имя");
-        findElemSetValue(LATIN_NAME_LOCATOR, LATIN_NAME, "имя на английском");
-        findElemSetValue(SECOND_NAME_LOCATOR, SECOND_NAME, "фамилия");
-        findElemSetValue(LATIN_SECOND_NAME_LOCATOR, LATIN_SECOND_NAME, "фамилия на английском");
-        findElemSetValue(BLOG_NAME_LOCATOR, BLOG_NAME, "имя в блоге");
-        findElemSetValue(DATE_OF_BIRTH_LOCATOR, DATE_OF_BIRTH, "дата рождения");
+    @FindBy(xpath = "//input [@name ='fname']")
+    private WebElement name;
 
-        makeClick(DATE_OF_BIRTH_LOCATOR, "окно календаря");
-    }
+    @FindBy(xpath = "//input [@name ='fname_latin']")
+    private WebElement latinName;
 
-    private void findElemSetValue(String locator, String value, String fieldName) {
-        WebDriverWait wait = new WebDriverWait(driver, 4);
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
-        element.clear();
-        element.sendKeys(value);
-        logger.info(format("Очищаем поле: %s и вводим новое поле: %s", fieldName, fieldName));
-    }
+    @FindBy(xpath = "//input [@name ='lname']")
+    private WebElement secondName;
 
-    private void makeClick(String locator, String fieldName) {
-        WebElement elem = driver.findElement(By.xpath(locator));
-        elem.click();
-        logger.info(format("Кликаем на поле: %s", fieldName));
+    @FindBy(xpath = "//input [@name ='lname_latin']")
+    private WebElement latinSecondName;
+
+    @FindBy(xpath = "//input [@name ='blog_name']")
+    private WebElement blogName;
+
+    @FindBy(xpath = "//input [@name ='date_of_birth']")
+    private WebElement dateOfBirth;
+
+    public void setPrivateDataInfo() {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        name.clear();
+        name.click();
+        logger.info("Очищаем поле: name и вводим новое поле: name");
+
+        latinName.clear();
+        latinName.click();
+        logger.info("Очищаем поле: latin name и вводим новое поле: latin name");
+
+        secondName.clear();
+        secondName.click();
+        logger.info("Очищаем поле: secondName и вводим новое поле: secondName");
+
+        latinSecondName.clear();
+        latinSecondName.click();
+        logger.info("Очищаем поле: latinSecondName и вводим новое поле: latinSecondName");
+
+        blogName.clear();
+        blogName.click();
+        logger.info("Очищаем поле: blogName и вводим новое поле: blogName");
+
+        dateOfBirth.clear();
+        dateOfBirth.click();
+        logger.info("Очищаем поле: dateOfBirth и вводим новое поле: dateOfBirth");
+
+        dateOfBirth.click();
+        logger.info("Кликаем на поле: dateOfBirth");
     }
 }
