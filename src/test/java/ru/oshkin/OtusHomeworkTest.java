@@ -9,9 +9,6 @@ public class OtusHomeworkTest {
     @Test
     public void setPrivetDataOtusTest() {
         LogInPage logInPage = new LogInPage();
-        logInPage.logInByUser();
-
-        PrivateDataPage privateDataPage = new PrivateDataPage();
-        privateDataPage.setPrivateDataInfo();
+        logInPage.logInByUser().setPrivateDataInfo();
     }
 }

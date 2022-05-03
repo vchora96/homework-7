@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -34,8 +35,12 @@ public class LogInPage extends BasePage {
     @FindBy(xpath = "//a[@title ='О себе']")
     private WebElement aboutUserButton;
 
+    public LogInPage() {
+        super();
+        PageFactory.initElements(driver, this);
+    }
 
-    public void logInByUser() {
+    public PrivateDataPage logInByUser() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         String link = "https://otus.ru";
         driver.get(link);
@@ -60,5 +65,7 @@ public class LogInPage extends BasePage {
 
         aboutUserButton.click();
         logger.info("Открываем информацию о себе");
+
+        return new PrivateDataPage(driver);
     }
 }

@@ -15,6 +15,9 @@ public class BasePage {
         //String envVariable = System.getProperty("type");
         WebBrowserType type = WebBrowserType.valueOf(envVariable);
         driver = WebDriverFactory.create(type);
-        PageFactory.initElements(driver, this);
+    }
+
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
     }
 }

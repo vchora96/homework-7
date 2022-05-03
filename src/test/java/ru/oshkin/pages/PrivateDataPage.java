@@ -2,8 +2,10 @@ package ru.oshkin.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +31,12 @@ public class PrivateDataPage extends BasePage {
     @FindBy(xpath = "//input [@name ='date_of_birth']")
     private WebElement dateOfBirth;
 
-    public void setPrivateDataInfo() {
+    public PrivateDataPage(WebDriver driver) {
+        super();
+        PageFactory.initElements(driver, this);
+    }
+
+    public MainPage setPrivateDataInfo() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         name.clear();
@@ -58,5 +65,7 @@ public class PrivateDataPage extends BasePage {
 
         dateOfBirth.click();
         logger.info("Кликаем на поле: dateOfBirth");
+
+        return new MainPage(driver);
     }
 }
