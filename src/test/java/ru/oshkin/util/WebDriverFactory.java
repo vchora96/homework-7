@@ -60,6 +60,5 @@ public class WebDriverFactory {
             default:
                 throw new IllegalStateException("Unexpected value: " + webDriverName);
         }
-
     }
 }

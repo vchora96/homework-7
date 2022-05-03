@@ -10,8 +10,8 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 import static java.lang.String.format;
-import static ru.oshkin.util.TestData.PHONE_NUMBER;
-import static ru.oshkin.util.TestData.SKYPE_LOGIN;
+import static ru.oshkin.util.constants.TestData.PHONE_NUMBER;
+import static ru.oshkin.util.constants.TestData.SKYPE_LOGIN;
 
 public class ContactInfoPage extends BasePage {
 

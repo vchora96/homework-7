@@ -1,4 +1,4 @@
-package ru.oshkin.util;
+package ru.oshkin.util.constants;
 
 public class TestData {
     public static final String NAME = "Жора";

@@ -9,9 +9,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static ru.oshkin.util.TestData.*;
-import static ru.oshkin.util.TestData.SKYPE_LOGIN;
-import static ru.oshkin.util.TestLocatorsData.*;
+import static ru.oshkin.util.constants.TestData.*;
+import static ru.oshkin.util.constants.TestData.SKYPE_LOGIN;
+import static ru.oshkin.util.constants.TestLocatorsData.*;
 
 public class CheckHelper {
 

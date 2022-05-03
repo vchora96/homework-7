@@ -1,4 +1,4 @@
-package ru.oshkin.util;
+package ru.oshkin.util.constants;
 
 public class TestLocatorsData {
     public static final String NAME_LOCATOR ="//input [@name ='fname']";

@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 public class LogInPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(LogInPage.class.getName());
-    private final String login = System.getenv("login");
-    private final String pass = System.getenv("pass");
+    private final String login = System.getProperty("login");
+    private final String pass = System.getProperty("pass");
 
     @FindBy(xpath = "//button[@data-modal-id='new-log-reg']")
     private WebElement logPage;

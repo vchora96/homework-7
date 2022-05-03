@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static ru.oshkin.util.TestData.*;
+import static ru.oshkin.util.constants.TestData.*;
 
 public class PrivateDataPage extends BasePage {
 
