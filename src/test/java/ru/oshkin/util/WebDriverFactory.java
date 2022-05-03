@@ -1,4 +1,4 @@
-package ru.oshkin;
+package ru.oshkin.util;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;

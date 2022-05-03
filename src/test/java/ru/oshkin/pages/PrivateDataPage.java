@@ -6,9 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import ru.oshkin.old.TestData;
 
-import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static ru.oshkin.util.TestData.*;
 
 public class PrivateDataPage extends BasePage {
 
@@ -35,32 +35,32 @@ public class PrivateDataPage extends BasePage {
     public PrivateDataPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, SECONDS);
     }
 
     public MainPage setPrivateDataInfo() {
         name.clear();
-        name.sendKeys(TestData.NAME);
+        name.sendKeys(NAME);
         logger.info("Очищаем поле: name и вводим новое поле: name");
 
         latinName.clear();
-        latinName.sendKeys(TestData.LATIN_NAME);
+        latinName.sendKeys(LATIN_NAME);
         logger.info("Очищаем поле: latin name и вводим новое поле: latin name");
 
         secondName.clear();
-        secondName.sendKeys(TestData.SECOND_NAME);
+        secondName.sendKeys(SECOND_NAME);
         logger.info("Очищаем поле: secondName и вводим новое поле: secondName");
 
         latinSecondName.clear();
-        latinSecondName.sendKeys(TestData.LATIN_SECOND_NAME);
+        latinSecondName.sendKeys(LATIN_SECOND_NAME);
         logger.info("Очищаем поле: latinSecondName и вводим новое поле: latinSecondName");
 
         blogName.clear();
-        blogName.sendKeys(TestData.BLOG_NAME);
+        blogName.sendKeys(BLOG_NAME);
         logger.info("Очищаем поле: blogName и вводим новое поле: blogName");
 
         dateOfBirth.clear();
-        dateOfBirth.sendKeys(TestData.DATE_OF_BIRTH);
+        dateOfBirth.sendKeys(DATE_OF_BIRTH);
         logger.info("Очищаем поле: dateOfBirth и вводим новое поле: dateOfBirth");
 
         dateOfBirth.click();

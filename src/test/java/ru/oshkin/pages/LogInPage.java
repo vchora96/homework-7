@@ -2,6 +2,7 @@ package ru.oshkin.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -35,8 +36,8 @@ public class LogInPage extends BasePage {
     @FindBy(xpath = "//a[@title ='О себе']")
     private WebElement aboutUserButton;
 
-    public LogInPage() {
-        super();
+    public LogInPage(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }

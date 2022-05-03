@@ -1,4 +1,4 @@
-package ru.oshkin;
+package ru.oshkin.util;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,14 +9,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static ru.oshkin.old.TestData.*;
-import static ru.oshkin.old.TestData.SKYPE_LOGIN;
-import static ru.oshkin.old.TestLocatorsData.*;
-import static ru.oshkin.old.TestLocatorsData.DATE_OF_BIRTH_LOCATOR;
+import static ru.oshkin.util.TestData.*;
+import static ru.oshkin.util.TestData.SKYPE_LOGIN;
+import static ru.oshkin.util.TestLocatorsData.*;
 
 public class CheckHelper {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public CheckHelper(WebDriver driver) {
         this.driver = driver;

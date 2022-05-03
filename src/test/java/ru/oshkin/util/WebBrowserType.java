@@ -1,4 +1,4 @@
-package ru.oshkin;
+package ru.oshkin.util;
 
 public enum WebBrowserType {
     CHROME,

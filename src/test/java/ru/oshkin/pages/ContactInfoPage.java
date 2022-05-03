@@ -6,13 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import ru.oshkin.CheckHelper;
 
 import java.util.List;
 
 import static java.lang.String.format;
-import static ru.oshkin.old.TestData.PHONE_NUMBER;
-import static ru.oshkin.old.TestData.SKYPE_LOGIN;
+import static ru.oshkin.util.TestData.PHONE_NUMBER;
+import static ru.oshkin.util.TestData.SKYPE_LOGIN;
 
 public class ContactInfoPage extends BasePage {
 
@@ -36,13 +35,16 @@ public class ContactInfoPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Способ связи')]")
     private WebElement communicationWay;
 
-    @FindBy(xpath = "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left " + "js-custom-select-options-container']/descendant::button[@title='Viber']")
+    @FindBy(xpath = "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left " +
+            "js-custom-select-options-container']/descendant::button[@title='Viber']")
     private List<WebElement> communicationViberWays;
 
-    @FindBy(xpath = "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left " + "js-custom-select-options-container']/descendant::button[@title ='Skype']")
+    @FindBy(xpath = "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left " +
+            "js-custom-select-options-container']/descendant::button[@title ='Skype']")
     private List<WebElement> communicationSkypeWays;
 
-    @FindBy(xpath = "//input[@class='input input_straight-top-left " + "input_straight-bottom-left lk-cv-block__input " + " lk-cv-block__input_9 lk-cv-block__input_md-8']")
+    @FindBy(xpath = "//input[@class='input input_straight-top-left " + "input_straight-bottom-left lk-cv-block__input " +
+            " lk-cv-block__input_9 lk-cv-block__input_md-8']")
     private List<WebElement> communicationValueWays;
 
     @FindBy(xpath = "//button[@title ='Сохранить и продолжить']")
@@ -53,7 +55,7 @@ public class ContactInfoPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public WebDriver setContactInfo() {
+    public void setContactInfo() {
 
         phone.click();
         logger.info("Кликнули по телефону");
@@ -74,8 +76,6 @@ public class ContactInfoPage extends BasePage {
 
         saveButton.click();
         logger.info("Кликаем на сохранить и продолжить");
-
-        return driver;
     }
 
     private void addContact(List<WebElement> communicationWays, String contactType, String value) {
