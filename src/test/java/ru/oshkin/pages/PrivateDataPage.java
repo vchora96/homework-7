@@ -34,11 +34,10 @@ public class PrivateDataPage extends BasePage {
     public PrivateDataPage(WebDriver driver) {
         super();
         PageFactory.initElements(driver, this);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     public MainPage setPrivateDataInfo() {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
         name.clear();
         name.click();
         logger.info("Очищаем поле: name и вводим новое поле: name");

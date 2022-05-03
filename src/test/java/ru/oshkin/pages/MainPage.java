@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.concurrent.TimeUnit;
+
 import static java.lang.String.format;
 
 public class MainPage extends BasePage {
@@ -36,9 +38,10 @@ public class MainPage extends BasePage {
     public MainPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    private void setMainInfo() {
+    public ContactInfoPage setMainInfo() {
         countryList.click();
         logger.info("Кликаем на список стран");
 
@@ -56,11 +59,7 @@ public class MainPage extends BasePage {
 
         beginnerLevel.click();
         logger.info("Кликаем на начальный уровень английского языка");
-    }
 
-    private void makeClick(String locator, String fieldName) {
-        WebElement elem = driver.findElement(By.xpath(locator));
-        elem.click();
-        logger.info(format("Кликаем на поле: %s", fieldName));
+        return new ContactInfoPage(driver);
     }
 }

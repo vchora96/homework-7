@@ -38,10 +38,10 @@ public class LogInPage extends BasePage {
     public LogInPage() {
         super();
         PageFactory.initElements(driver, this);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     public PrivateDataPage logInByUser() {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         String link = "https://otus.ru";
         driver.get(link);
         logger.info("Перешли по ссылке");

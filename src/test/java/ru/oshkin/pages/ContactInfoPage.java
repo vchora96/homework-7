@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -30,12 +31,27 @@ public class ContactInfoPage extends BasePage {
     @FindBy(xpath = "//div[@class ='modal__close ic-close js-close-modal']")
     private WebElement confirmationWindow;
 
+    @FindBy(css = "button.js-lk-cv-custom-select-add")
+    private WebElement addContactButton;
+
+    @FindBy(xpath = "//span[contains(text(),'Способ связи')]")
+    private WebElement communicationWay;
+
+    @FindBy(xpath = "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left " + "js-custom-select-options-container']/descendant::button[@title='Viber']")
+    private List<WebElement> communicationViberWays;
+
+    @FindBy(xpath = "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left " + "js-custom-select-options-container']/descendant::button[@title ='Skype']")
+    private List<WebElement> communicationSkypeWays;
+
+    @FindBy(xpath = "//input[@class='input input_straight-top-left " + "input_straight-bottom-left lk-cv-block__input " + " lk-cv-block__input_9 lk-cv-block__input_md-8']")
+    private List<WebElement> communicationValueWays;
+
     public ContactInfoPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    private void setContactInfo() {
+    public void setContactInfo() {
 
         phone.click();
         logger.info("Кликнули по телефону");
@@ -50,38 +66,27 @@ public class ContactInfoPage extends BasePage {
         confirmationWindow.click();
         logger.info("Закрываем окно с подтверждением номера телефона");
 
-        addContact(
-                "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left " +
-                        "js-custom-select-options-container']/descendant::button[@title='Viber']",
-                "Viber", PHONE_NUMBER);
-        addContact(
-                "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left " +
-                        "js-custom-select-options-container']/descendant::button[@title ='Skype']",
-                "Skype", SKYPE_LOGIN);
+        addContact(communicationViberWays, "Viber", PHONE_NUMBER);
+        addContact(communicationSkypeWays, "Skype", SKYPE_LOGIN);
+        logger.info("Два контакта успешно заполнены");
     }
 
-    private void addContact(String locator, String contactType, String value) {
-        driver.findElement(By.cssSelector("button.js-lk-cv-custom-select-add")).click();
+    private void addContact(List<WebElement> communicationWays, String contactType, String value) {
+        addContactButton.click();
         logger.info("Добавить контакт");
 
-        makeClick("//span[contains(text(),'Способ связи')]", "Способ связи");
+        communicationWay.click();
+        logger.info("Кликаем на способ связи");
 
-        selectCommunicationWay(locator, contactType);
-        List<WebElement> elements = driver.findElements(By.xpath("//input[@class='input input_straight-top-left " +
-                "input_straight-bottom-left lk-cv-block__input" +
-                " lk-cv-block__input_9 lk-cv-block__input_md-8']"));
-        for (WebElement element : elements) {
+        communicationWays.get(0).click();
+        logger.info(format("Выбираем способ связи %s", contactType));
+
+        for (WebElement element : communicationValueWays) {//проходимся по правой колонке = содержимому
             String text = element.getAttribute("value");
-            if (text.length() == 0) {
+            if (text.length() == 0) { //как только нашли пустое поле
                 element.sendKeys(value);
                 element.click();
             }
         }
-    }
-
-    private void selectCommunicationWay(String locator, String name) {
-        List<WebElement> communicationWays = driver.findElements(By.xpath(locator));
-        communicationWays.get(0).click();
-        logger.info(format("Выбираем способ связи %s", name));
     }
 }
