@@ -1,6 +1,7 @@
 package ru.oshkin.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import ru.oshkin.WebBrowserType;
 import ru.oshkin.WebDriverFactory;
 
@@ -14,5 +15,6 @@ public class BasePage {
         //String envVariable = System.getProperty("type");
         WebBrowserType type = WebBrowserType.valueOf(envVariable);
         driver = WebDriverFactory.create(type);
+        PageFactory.initElements(driver, this);
     }
 }
