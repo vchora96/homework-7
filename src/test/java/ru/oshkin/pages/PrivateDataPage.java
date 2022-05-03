@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ru.oshkin.old.TestData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,34 +33,34 @@ public class PrivateDataPage extends BasePage {
     private WebElement dateOfBirth;
 
     public PrivateDataPage(WebDriver driver) {
-        super();
+        super(driver);
         PageFactory.initElements(driver, this);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     public MainPage setPrivateDataInfo() {
         name.clear();
-        name.click();
+        name.sendKeys(TestData.NAME);
         logger.info("Очищаем поле: name и вводим новое поле: name");
 
         latinName.clear();
-        latinName.click();
+        latinName.sendKeys(TestData.LATIN_NAME);
         logger.info("Очищаем поле: latin name и вводим новое поле: latin name");
 
         secondName.clear();
-        secondName.click();
+        secondName.sendKeys(TestData.SECOND_NAME);
         logger.info("Очищаем поле: secondName и вводим новое поле: secondName");
 
         latinSecondName.clear();
-        latinSecondName.click();
+        latinSecondName.sendKeys(TestData.LATIN_SECOND_NAME);
         logger.info("Очищаем поле: latinSecondName и вводим новое поле: latinSecondName");
 
         blogName.clear();
-        blogName.click();
+        blogName.sendKeys(TestData.BLOG_NAME);
         logger.info("Очищаем поле: blogName и вводим новое поле: blogName");
 
         dateOfBirth.clear();
-        dateOfBirth.click();
+        dateOfBirth.sendKeys(TestData.DATE_OF_BIRTH);
         logger.info("Очищаем поле: dateOfBirth и вводим новое поле: dateOfBirth");
 
         dateOfBirth.click();

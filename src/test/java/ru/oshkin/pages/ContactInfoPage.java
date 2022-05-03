@@ -2,12 +2,11 @@ package ru.oshkin.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ru.oshkin.CheckHelper;
 
 import java.util.List;
 
@@ -46,12 +45,15 @@ public class ContactInfoPage extends BasePage {
     @FindBy(xpath = "//input[@class='input input_straight-top-left " + "input_straight-bottom-left lk-cv-block__input " + " lk-cv-block__input_9 lk-cv-block__input_md-8']")
     private List<WebElement> communicationValueWays;
 
+    @FindBy(xpath = "//button[@title ='Сохранить и продолжить']")
+    private WebElement saveButton;
+
     public ContactInfoPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public void setContactInfo() {
+    public WebDriver setContactInfo() {
 
         phone.click();
         logger.info("Кликнули по телефону");
@@ -69,6 +71,11 @@ public class ContactInfoPage extends BasePage {
         addContact(communicationViberWays, "Viber", PHONE_NUMBER);
         addContact(communicationSkypeWays, "Skype", SKYPE_LOGIN);
         logger.info("Два контакта успешно заполнены");
+
+        saveButton.click();
+        logger.info("Кликаем на сохранить и продолжить");
+
+        return driver;
     }
 
     private void addContact(List<WebElement> communicationWays, String contactType, String value) {
