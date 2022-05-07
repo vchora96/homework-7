@@ -3,6 +3,8 @@ package ru.oshkin.util;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +19,37 @@ public class CheckHelper {
 
     private final WebDriver driver;
 
+    @FindBy(xpath = "//input [@name ='fname']")
+    private WebElement name;
+
+    @FindBy(xpath = "//input [@name ='fname_latin']")
+    private WebElement secondName;
+
+    @FindBy(xpath = "//input [@name ='lname']")
+    private WebElement latinName;
+
+    @FindBy(xpath = "//input [@name ='lname_latin']")
+    private WebElement latinSecondName;
+
+    @FindBy(xpath = "//input [@name ='blog_name']")
+    private WebElement blogName;
+
+    @FindBy(xpath = "//input [@name ='date_of_birth']")
+    private WebElement dateOfBirth;
+
     public CheckHelper(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public void checkPrivateDataInfo() {
-        assertEquals(NAME, driver.findElement(By.xpath(NAME_LOCATOR)).getAttribute("value"));
-        assertEquals(LATIN_NAME, driver.findElement(By.xpath(LATIN_NAME_LOCATOR)).getAttribute("value"));
-        assertEquals(SECOND_NAME, driver.findElement(By.xpath(SECOND_NAME_LOCATOR)).getAttribute("value"));
-        assertEquals(LATIN_SECOND_NAME, driver.findElement(By.xpath(LATIN_SECOND_NAME_LOCATOR)).getAttribute("value"));
-        assertEquals(BLOG_NAME, driver.findElement(By.xpath(BLOG_NAME_LOCATOR)).getAttribute("value"));
-        assertEquals(DATE_OF_BIRTH, driver.findElement(By.xpath(DATE_OF_BIRTH_LOCATOR)).getAttribute("value"));
+        assertEquals(NAME, name.getAttribute("value"));
+        assertEquals(LATIN_NAME, secondName.getAttribute("value"));
+        assertEquals(SECOND_NAME, latinName.getAttribute("value"));
+        assertEquals(LATIN_SECOND_NAME, latinSecondName.getAttribute("value"));
+        assertEquals(BLOG_NAME, blogName.getAttribute("value"));
+        assertEquals(DATE_OF_BIRTH, dateOfBirth.getAttribute("value"));
     }
-
 
     public void checkMainInfo() {
         assertEquals("Узбекистан", driver.findElement(By.xpath("//input[@name ='country']/following-sibling::div")).getText());

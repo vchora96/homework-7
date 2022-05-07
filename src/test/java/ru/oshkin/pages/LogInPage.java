@@ -15,9 +15,6 @@ public class LogInPage extends BasePage {
     private final String login = System.getProperty("login");
     private final String pass = System.getProperty("pass");
 
-    @FindBy(xpath = "//button[@data-modal-id='new-log-reg']")
-    private WebElement logPage;
-
     @FindBy(xpath = "//input[@type='text' and @placeholder='Электронная почта']")
     private WebElement mail;
 
@@ -43,30 +40,46 @@ public class LogInPage extends BasePage {
     }
 
     public PrivateDataPage logInByUser() {
-        String link = "https://otus.ru";
-        driver.get(link);
-        logger.info("Перешли по ссылке");
+        openSite();
 
-        logPage.click();
+        setLogin();
+        setPassword();
+        autorize();
 
-        mail.sendKeys(login);
-        logger.info("Ввели почту");
-
-        password.sendKeys(pass);
-        logger.info("Ввели пароль");
-
-        button.submit();
-        logger.info("Попытка авторизации");
-
-        userButton.click();
-        logger.info("Раскрытие блока");
-
-        personalAccountButton.click();
-        logger.info("Открываем личный кабинет");
-
-        aboutUserButton.click();
-        logger.info("Открываем информацию о себе");
+        openBlock();
+        openPersonalCabinet();
+        openAboutUser();
 
         return new PrivateDataPage(driver);
+    }
+
+    private void setLogin() {
+        mail.sendKeys(login);
+        logger.info("Ввели почту");
+    }
+
+    private void setPassword() {
+        password.sendKeys(pass);
+        logger.info("Ввели пароль");
+    }
+
+    private void autorize() {
+        button.submit();
+        logger.info("Попытка авторизации");
+    }
+
+    private void openBlock() {
+        userButton.click();
+        logger.info("Раскрытие блока");
+    }
+
+    private void openPersonalCabinet() {
+        personalAccountButton.click();
+        logger.info("Открываем личный кабинет");
+    }
+
+    private void openAboutUser() {
+        aboutUserButton.click();
+        logger.info("Открываем информацию о себе");
     }
 }
