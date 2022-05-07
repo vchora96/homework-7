@@ -23,17 +23,17 @@ public class WebDriverFactory {
             case CHROME:
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver((ChromeOptions) options);
-                logger.info("Создали драйвер для CHROME c параметрами");
+                logger.info("Создали драйвер для CHROME");
                 return driver;
             case OPERA:
                 WebDriverManager.operadriver().setup();
                 driver = new OperaDriver((OperaOptions) options);
-                logger.info("Создали драйвер для OPERA c параметрами");
+                logger.info("Создали драйвер для OPERA");
                 return driver;
             case MOZILLA:
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver((FirefoxOptions) options);
-                logger.info("Создали драйвер для MOZILLA c параметрами");
+                logger.info("Создали драйвер для MOZILLA");
                 return driver;
             default:
                 throw new IllegalStateException("Unexpected value: " + webDriverName);
