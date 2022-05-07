@@ -1,4 +1,4 @@
-package ru.oshkin.util;
+package ru.oshkin.factory;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
@@ -10,35 +10,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
+import ru.oshkin.util.WebBrowserType;
 
 public class WebDriverFactory {
 
     private static final Logger logger = LogManager.getLogger(WebDriverFactory.class.getName());
 
     private static WebDriver driver;
-
-    public static WebDriver create(WebBrowserType webDriverName) {
-        switch (webDriverName) {
-            case CHROME:
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                logger.info("Создали драйвер для CHROME");
-                return driver;
-            case OPERA:
-                WebDriverManager.operadriver().setup();
-                driver = new OperaDriver();
-                logger.info("Создали драйвер для OPERA");
-                return driver;
-            case MOZILLA:
-                WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver();
-                logger.info("Создали драйвер для MOZILLA");
-                return driver;
-            default:
-                throw new IllegalStateException("Unexpected value: " + webDriverName);
-        }
-
-    }
 
     public static WebDriver create(WebBrowserType webDriverName, Object options) {
         switch (webDriverName) {

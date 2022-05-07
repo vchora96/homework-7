@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import ru.oshkin.pages.LogInPage;
 import ru.oshkin.util.CheckHelper;
 import ru.oshkin.util.WebBrowserType;
-import ru.oshkin.util.WebDriverFactory;
+import ru.oshkin.factory.WebDriverFactory;
 
 import java.util.Locale;
 
@@ -32,7 +32,7 @@ public class OtusHomeworkTest {
 
     @Test
     public void setPrivetDataOtusTest() {
-        driver = WebDriverFactory.create(type);
+        driver = WebDriverFactory.create(type, null);
 
         new LogInPage(driver)
                 .logInByUser()
@@ -40,9 +40,9 @@ public class OtusHomeworkTest {
                 .setMainInfo()
                 .setContactInfo();
 
-        driver.quit();
-        driver = WebDriverFactory.create(type);
-        new LogInPage(driver).logInByUser();
+        driver.close();
+        LogInPage logInPage = new LogInPage(driver);
+        logInPage.logInByUser();
 
         //выполняем проверки
         CheckHelper checkHelper = new CheckHelper(driver);
@@ -63,9 +63,9 @@ public class OtusHomeworkTest {
                 .setMainInfo()
                 .setContactInfo();
 
-        driver.quit();
-        driver = WebDriverFactory.create(type, options);
-        new LogInPage(driver).logInByUser();
+        driver.close();
+        LogInPage logInPage = new LogInPage(driver);
+        logInPage.logInByUser();
 
         //выполняем проверки
         CheckHelper checkHelper = new CheckHelper(driver);
