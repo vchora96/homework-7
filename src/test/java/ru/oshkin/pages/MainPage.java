@@ -89,7 +89,7 @@ public class MainPage extends BasePage {
 
     private WebElement selectCountry(Country country) {
         String countryCountry = country.getCountry();
-        String selector = String.format("/button[@title='%s']", countryCountry);
+        String selector = String.format("//button[@title='%s']", countryCountry);
         return driver.findElement(By.xpath(selector));
     }
 }

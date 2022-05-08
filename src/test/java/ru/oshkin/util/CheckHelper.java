@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import ru.oshkin.util.constants.City;
+import ru.oshkin.util.constants.Country;
+import ru.oshkin.util.constants.LanguageLevel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,10 +54,10 @@ public class CheckHelper {
     }
 
     public void checkMainInfo() {
-        assertEquals("Узбекистан", driver.findElement(By.xpath("//input[@name ='country']/following-sibling::div")).getText());
-        assertEquals("Бухара", driver.findElement(By.xpath("//input[@name ='city']/" +
+        assertEquals(Country.UZBEKISTAN.getCountry(), driver.findElement(By.xpath("//input[@name ='country']/following-sibling::div")).getText());
+        assertEquals(City.ANGREN.getCityName(), driver.findElement(By.xpath("//input[@name ='city']/" +
                 "following-sibling::div")).getText());
-        assertEquals("Начальный уровень (Beginner)", driver.findElement(By.xpath("//input[@name ='english_level']/" +
+        assertEquals(LanguageLevel.Elementary.getDescription(), driver.findElement(By.xpath("//input[@name ='english_level']/" +
                 "following-sibling::div")).getText());
     }
 

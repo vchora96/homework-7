@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 public class LogInPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(LogInPage.class.getName());
-    private final String login = System.getProperty("login");
-    private final String pass = System.getProperty("pass");
+    private final String login = System.getProperty("login", "macorax714@idurse.com");
+    private final String pass = System.getProperty("pass", "");
 
     @FindBy(xpath = "//input[@type='text' and @placeholder='Электронная почта']")
     private WebElement mail;
@@ -54,11 +54,13 @@ public class LogInPage extends BasePage {
     }
 
     private void setLogin() {
+        mail.click();
         mail.sendKeys(login);
         logger.info("Ввели почту");
     }
 
     private void setPassword() {
+        password.click();
         password.sendKeys(pass);
         logger.info("Ввели пароль");
     }

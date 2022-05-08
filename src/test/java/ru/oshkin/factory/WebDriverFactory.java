@@ -22,7 +22,7 @@ public class WebDriverFactory {
         switch (webDriverName) {
             case CHROME:
                 WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver((ChromeOptions) options);
+                driver = options == null ? new ChromeDriver() : new ChromeDriver((ChromeOptions) options);
                 logger.info("Создали драйвер для CHROME");
                 return driver;
             case OPERA:

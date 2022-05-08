@@ -12,7 +12,7 @@ public abstract class BasePage {
     private static final Logger logger = LogManager.getLogger(BasePage.class.getName());
 
     protected WebDriver driver;
-    private final String baseUrl = System.getProperty("url");
+    private final String baseUrl = System.getProperty("url", "https://otus.ru");
 
     @FindBy(xpath = "//button[@data-modal-id='new-log-reg']")
     private WebElement logPage;

@@ -19,7 +19,7 @@ public class OtusHomeworkTest {
 
     @BeforeEach
     public void startUp() {
-        String envVariable = System.getProperty("browser");
+        String envVariable = System.getProperty("browser", "CHROME");
         this.type = WebBrowserType.valueOf(envVariable.toUpperCase(Locale.ROOT));
     }
 
@@ -41,6 +41,7 @@ public class OtusHomeworkTest {
                 .setContactInfo();
 
         driver.close();
+        driver = WebDriverFactory.create(type, null);
         LogInPage logInPage = new LogInPage(driver);
         logInPage.logInByUser();
 

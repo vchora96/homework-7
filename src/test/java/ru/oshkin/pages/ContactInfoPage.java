@@ -26,7 +26,7 @@ public class ContactInfoPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'Отправить')]")
     private WebElement sendButton;
 
-    @FindBy(xpath = "//div[@class ='modal__close ic-close js-close-modal']")
+    @FindBy(css = "div div.modal__close.ic-close.js-close-modal")
     private WebElement confirmationWindow;
 
     @FindBy(css = "button.js-lk-cv-custom-select-add")
@@ -49,6 +49,12 @@ public class ContactInfoPage extends BasePage {
 
     @FindBy(xpath = "//button[@title ='Сохранить и продолжить']")
     private WebElement saveButton;
+
+    @FindBy(xpath = "//div[@class = 'header2-menu__item-wrapper header2-menu__item-wrapper__username']")
+    private WebElement userButton;
+
+    @FindBy(css = "div a[title='Выход']")
+    private WebElement exitButton;
 
     public ContactInfoPage(WebDriver driver) {
         super(driver);
@@ -76,6 +82,18 @@ public class ContactInfoPage extends BasePage {
 
         saveButton.click();
         logger.info("Кликаем на сохранить и продолжить");
+
+        openBlock();
+
+        exitButton.click();
+        logger.info("Выходим из профиля клиента");
+
+
+    }
+
+    private void openBlock() {
+        userButton.click();
+        logger.info("Раскрытие блока");
     }
 
     private void addContact(List<WebElement> communicationWays, String contactType, String value) {
