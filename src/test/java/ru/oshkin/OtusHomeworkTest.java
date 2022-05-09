@@ -65,6 +65,7 @@ public class OtusHomeworkTest {
                 .setContactInfo();
 
         driver.close();
+        driver = WebDriverFactory.create(type, null);
         LogInPage logInPage = new LogInPage(driver);
         logInPage.logInByUser();
 

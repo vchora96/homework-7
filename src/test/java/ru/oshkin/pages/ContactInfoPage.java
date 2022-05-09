@@ -35,22 +35,19 @@ public class ContactInfoPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Способ связи')]")
     private WebElement communicationWay;
 
-    @FindBy(xpath = "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left " +
-            "js-custom-select-options-container']/descendant::button[@title='Viber']")
+    @FindBy(css = "button[title='Viber']")
     private List<WebElement> communicationViberWays;
 
-    @FindBy(xpath = "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left " +
-            "js-custom-select-options-container']/descendant::button[@title ='Skype']")
+    @FindBy(xpath = "button[title='Skype']")
     private List<WebElement> communicationSkypeWays;
 
-    @FindBy(xpath = "//input[@class='input input_straight-top-left " + "input_straight-bottom-left lk-cv-block__input " +
-            " lk-cv-block__input_9 lk-cv-block__input_md-8']")
+    @FindBy(css = "input.input.input_straight-top-left.input_straight-bottom-left.lk-cv-block__input")
     private List<WebElement> communicationValueWays;
 
     @FindBy(xpath = "//button[@title ='Сохранить и продолжить']")
     private WebElement saveButton;
 
-    @FindBy(xpath = "//div[@class = 'header2-menu__item-wrapper header2-menu__item-wrapper__username']")
+    @FindBy(xpath = "p.header2-menu__item-text.header2-menu__item-text__username")
     private WebElement userButton;
 
     @FindBy(css = "div a[title='Выход']")

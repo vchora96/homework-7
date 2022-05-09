@@ -13,7 +13,7 @@ public class LogInPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(LogInPage.class.getName());
     private final String login = System.getProperty("login", "macorax714@idurse.com");
-    private final String pass = System.getProperty("pass", "");
+    private final String pass = System.getProperty("pass", "Test12345");
 
     @FindBy(xpath = "//input[@type='text' and @placeholder='Электронная почта']")
     private WebElement mail;
@@ -24,7 +24,7 @@ public class LogInPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'Войти')]")
     private WebElement button;
 
-    @FindBy(xpath = "//div[@class = 'header2-menu__item-wrapper header2-menu__item-wrapper__username']")
+    @FindBy(css = "p.header2-menu__item-text.header2-menu__item-text__username")
     private WebElement userButton;
 
     @FindBy(xpath = "//a[@title ='Личный кабинет']")
@@ -32,6 +32,10 @@ public class LogInPage extends BasePage {
 
     @FindBy(xpath = "//a[@title ='О себе']")
     private WebElement aboutUserButton;
+
+    @FindBy(css = "jdiv.closeIcon_f9a1")
+    private WebElement chatCross;
+
 
     public LogInPage(WebDriver driver) {
         super(driver);
@@ -42,6 +46,8 @@ public class LogInPage extends BasePage {
     public PrivateDataPage logInByUser() {
         openSite();
 
+        closeChat();
+
         setLogin();
         setPassword();
         autorize();
@@ -51,6 +57,13 @@ public class LogInPage extends BasePage {
         openAboutUser();
 
         return new PrivateDataPage(driver);
+    }
+
+    private void closeChat() {
+        if (chatCross.isDisplayed()) {
+            chatCross.click();
+            logger.info("Закрываем всплывающее окно чата");
+        }
     }
 
     private void setLogin() {

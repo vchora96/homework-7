@@ -16,13 +16,11 @@ import java.util.concurrent.TimeUnit;
 public class MainPage extends BasePage {
     private static final Logger logger = LogManager.getLogger(MainPage.class.getName());
 
-    @FindBy(xpath = "//div[@class ='input input_full lk-cv-block__input lk-cv-block__input_fake " +
-            "lk-cv-block__input_select-fake js-custom-select-presentation']")
+    @FindBy(css = "input[name='country'].js-custom-select-input + div")
     private WebElement countryList;
 
 
-    @FindBy(xpath = "//div[@class ='input input_full lk-cv-block__input lk-cv-block__input_fake " +
-            "lk-cv-block__input_select-fake js-custom-select-presentation']/child::span[contains(text(),'Город')]")
+    @FindBy(css = "input[data-title='Город'].js-custom-select-input + div")
     private WebElement city;
 
     @FindBy(xpath = "//input[@data-title ='Уровень знания английского языка']/following-sibling::div")

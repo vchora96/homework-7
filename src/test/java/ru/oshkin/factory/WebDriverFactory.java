@@ -27,7 +27,7 @@ public class WebDriverFactory {
                 return driver;
             case OPERA:
                 WebDriverManager.operadriver().setup();
-                driver = new OperaDriver((OperaOptions) options);
+                driver = new OperaDriver((OperaOptions) options);//todo:добавить тернарный оператор
                 logger.info("Создали драйвер для OPERA");
                 return driver;
             case MOZILLA:
