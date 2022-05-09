@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.String.format;
 import static ru.oshkin.util.constants.TestData.PHONE_NUMBER;
@@ -35,10 +36,12 @@ public class ContactInfoPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'Способ связи')]")
     private WebElement communicationWay;
 
-    @FindBy(css = "button[title='Viber']")
+    @FindBy(xpath = "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left" +
+            " js-custom-select-options-container']/descendant::button[@title='Viber']")
     private List<WebElement> communicationViberWays;
 
-    @FindBy(xpath = "button[title='Skype']")
+    @FindBy(xpath = "//div[@class ='lk-cv-block__select-options lk-cv-block__select-options_left" +
+            " js-custom-select-options-container']/descendant::button[@title='Skype']")
     private List<WebElement> communicationSkypeWays;
 
     @FindBy(css = "input.input.input_straight-top-left.input_straight-bottom-left.lk-cv-block__input")
@@ -47,7 +50,7 @@ public class ContactInfoPage extends BasePage {
     @FindBy(xpath = "//button[@title ='Сохранить и продолжить']")
     private WebElement saveButton;
 
-    @FindBy(xpath = "p.header2-menu__item-text.header2-menu__item-text__username")
+    @FindBy(css = "p.header2-menu__item-text.header2-menu__item-text__username")
     private WebElement userButton;
 
     @FindBy(css = "div a[title='Выход']")
@@ -56,6 +59,7 @@ public class ContactInfoPage extends BasePage {
     public ContactInfoPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     public void setContactInfo() {

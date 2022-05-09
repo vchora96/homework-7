@@ -43,7 +43,7 @@ public class MainPage extends BasePage {
         return new ContactInfoPage(driver);
     }
 
-    private void choseLanguageLevel(){
+    private void choseLanguageLevel() {
         selectLanguageLevel(LanguageLevel.Elementary).click();
         logger.info("Кликаем на начальный уровень английского языка");
     }
@@ -54,6 +54,7 @@ public class MainPage extends BasePage {
     }
 
     private void clickCity() {
+        //todo: иногда не удается кликнуть на город, так как на предыдущем шаге не всплывает окно
         selectCity(City.ANGREN).click();
         logger.info("Кликаем на город");
     }
