@@ -27,12 +27,12 @@ public class WebDriverFactory {
                 return driver;
             case OPERA:
                 WebDriverManager.operadriver().setup();
-                driver = new OperaDriver((OperaOptions) options);//todo:добавить тернарный оператор
+                driver = options == null ? new OperaDriver() : new OperaDriver((OperaOptions) options);
                 logger.info("Создали драйвер для OPERA");
                 return driver;
             case MOZILLA:
                 WebDriverManager.firefoxdriver().setup();
-                driver = new FirefoxDriver((FirefoxOptions) options);
+                driver = options == null ? new FirefoxDriver() : new FirefoxDriver((FirefoxOptions) options);
                 logger.info("Создали драйвер для MOZILLA");
                 return driver;
             default:
