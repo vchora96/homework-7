@@ -2,7 +2,6 @@ package ru.oshkin.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,13 +10,12 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class LogInPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(LogInPage.class.getName());
     private final String login = System.getProperty("login", "macorax714@idurse.com");
-    private final String pass = System.getProperty("pass", "Test12345");
+    private final String pass = System.getProperty("pass", "********"); //пароль от тестовой УЗ
 
     @FindBy(xpath = "//input[@type='text' and @placeholder='Электронная почта']")
     private WebElement mail;
@@ -47,7 +45,7 @@ public class LogInPage extends BasePage {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    public PrivateDataPage logInByUser() {
+    public PersonalDataPage logInByUser() {
         openSite();
 
         closeChat();
@@ -60,7 +58,7 @@ public class LogInPage extends BasePage {
         openPersonalCabinet();
         openAboutUser();
 
-        return new PrivateDataPage(driver);
+        return new PersonalDataPage(driver);
     }
 
     private void closeChat() {

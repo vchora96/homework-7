@@ -15,12 +15,13 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static ru.oshkin.util.constants.TestData.PHONE_NUMBER;
-import static ru.oshkin.util.constants.TestData.SKYPE_LOGIN;
 
 public class ContactInfoPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(ContactInfoPage.class.getName());
+
+    public static final String PHONE_NUMBER = "+7 966 666-66-66";
+    public static final String SKYPE_LOGIN = "SKYPE-TEST-LOGIN";
 
     private String contactLocator = ".js-custom-select-options-container:not(.hide)" +
             " button[title='%s']";
