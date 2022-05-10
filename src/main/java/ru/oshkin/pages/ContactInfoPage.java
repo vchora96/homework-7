@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import ru.oshkin.util.Contact;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -104,7 +103,7 @@ public class ContactInfoPage extends BasePage {
     /*
      *Принимает список контактов для добавления на страницу
      */
-    private void addContact(ArrayList<Contact> contacts) {
+    private void addContacts(ArrayList<Contact> contacts) {
         for (Contact contact : contacts) {//проходим по каждому контакту из списка
             addContactButton.click();
             logger.info("Добавить контакт");
@@ -148,7 +147,10 @@ public class ContactInfoPage extends BasePage {
     }
 
     private void setContacts() {
-        addContact(Arrays.asList(new Contact[]{new Contact("Skype", PHONE_NUMBER)}));
+        ArrayList<Contact> contacts = new ArrayList<>();
+        contacts.add(new Contact("Skype", SKYPE_LOGIN));
+        contacts.add(new Contact("Viber", PHONE_NUMBER));
+        addContacts(contacts);
         logger.info("Два контакта успешно заполнены");
     }
 

@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ru.oshkin.util.constants.City;
-import ru.oshkin.util.constants.Country;
 import ru.oshkin.util.constants.LanguageLevel;
 
 import java.util.concurrent.TimeUnit;
@@ -36,9 +35,7 @@ public class MainPage extends BasePage {
 
     public ContactInfoPage setMainInfo() {
         clickCountries();
-        choseCountry();
-        choseCities();
-        clickCity();
+        choseResidencePlace(City.ANGREN);
         clickLanguageLevel();
         choseLanguageLevel();
 
@@ -46,7 +43,7 @@ public class MainPage extends BasePage {
     }
 
     public ContactInfoPage checkMainInfo() {
-        assertEquals(Country.UZBEKISTAN.getCountry(), driver.findElement(By.xpath("//input[@name ='country']/following-sibling::div")).getText());
+        assertEquals(City.ANGREN.getCountry(), driver.findElement(By.xpath("//input[@name ='country']/following-sibling::div")).getText());
         assertEquals(City.ANGREN.getCityName(), driver.findElement(By.xpath("//input[@name ='city']/" +
                 "following-sibling::div")).getText());
         assertEquals(LanguageLevel.Elementary.getDescription(), driver.findElement(By.xpath("//input[@name ='english_level']/" +
@@ -65,15 +62,19 @@ public class MainPage extends BasePage {
         logger.info("Кликаем на уровень английского языка");
     }
 
-    private void clickCity() {
+    private void clickCity(City city) {
         //todo: иногда не удается кликнуть на город, так как на предыдущем шаге не всплывает окно
-        selectCity(City.ANGREN).click();
+        WebElement selectCity = selectCity(city);
+        selectCity.click();
         logger.info("Кликаем на город");
     }
 
-    private void choseCountry() {
-        selectCountry(Country.UZBEKISTAN).click();
-        logger.info("Кликаем на Узбекистан");
+    private void choseResidencePlace(City city) {
+        WebElement country = selectCountry(city.getCountry());
+        country.click();
+        logger.info(String.format("Кликаем на страну: %s", city.getCountry()));
+        choseCities();
+        clickCity(city);
     }
 
     private void choseCities() {
@@ -87,7 +88,7 @@ public class MainPage extends BasePage {
     }
 
     private WebElement selectCity(City city) {
-        String cityName = city.getCityName();
+        String cityName = city.getCityName();//Получаем имя города из enum
         String selector = String.format("//button[@title='%s']", cityName);
         return driver.findElement(By.xpath(selector));
     }
@@ -98,9 +99,8 @@ public class MainPage extends BasePage {
         return driver.findElement(By.xpath(selector));
     }
 
-    private WebElement selectCountry(Country country) {
-        String countryCountry = country.getCountry();
-        String selector = String.format("//button[@title='%s']", countryCountry);
+    private WebElement selectCountry(String country) {
+        String selector = String.format("//button[@title='%s']", country);
         return driver.findElement(By.xpath(selector));
     }
 }
