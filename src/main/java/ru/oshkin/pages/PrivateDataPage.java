@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.oshkin.util.constants.TestData.*;
 
 public class PrivateDataPage extends BasePage {
@@ -65,6 +66,17 @@ public class PrivateDataPage extends BasePage {
 
         dateOfBirth.click();
         logger.info("Кликаем на поле: dateOfBirth");
+
+        return new MainPage(driver);
+    }
+
+    public MainPage checkPrivateDataInfo() {
+        assertEquals(NAME, name.getAttribute("value"));
+        assertEquals(LATIN_NAME, secondName.getAttribute("value"));
+        assertEquals(SECOND_NAME, latinName.getAttribute("value"));
+        assertEquals(LATIN_SECOND_NAME, latinSecondName.getAttribute("value"));
+        assertEquals(BLOG_NAME, blogName.getAttribute("value"));
+        assertEquals(DATE_OF_BIRTH, dateOfBirth.getAttribute("value"));
 
         return new MainPage(driver);
     }

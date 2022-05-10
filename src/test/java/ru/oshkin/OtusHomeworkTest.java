@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import ru.oshkin.pages.LogInPage;
-import ru.oshkin.util.CheckHelper;
 import ru.oshkin.util.WebBrowserType;
 import ru.oshkin.factory.WebDriverFactory;
 
@@ -19,7 +18,7 @@ public class OtusHomeworkTest {
 
     @BeforeEach
     public void startUp() {
-        String envVariable = System.getProperty("browser", "CHROME");
+        String envVariable = System.getProperty("browser", "MOZILLA");
         this.type = WebBrowserType.valueOf(envVariable.toUpperCase(Locale.ROOT));
     }
 
@@ -34,6 +33,7 @@ public class OtusHomeworkTest {
     public void setPrivetDataOtusTest() {
         driver = WebDriverFactory.create(type, null);
 
+        //Заполняем страницу данными
         new LogInPage(driver)
                 .logInByUser()
                 .setPrivateDataInfo()
@@ -42,14 +42,9 @@ public class OtusHomeworkTest {
 
         driver.close();
         driver = WebDriverFactory.create(type, null);
-        LogInPage logInPage = new LogInPage(driver);
-        logInPage.logInByUser();
+        // проверяем заполненность страницы
+        checkData();
 
-        //выполняем проверки
-        CheckHelper checkHelper = new CheckHelper(driver);
-        checkHelper.checkPrivateDataInfo();
-        checkHelper.checkMainInfo();
-        checkHelper.checkContactInfo();
     }
 
     @Test
@@ -58,6 +53,7 @@ public class OtusHomeworkTest {
         options.addArguments("headless");
         driver = WebDriverFactory.create(type, options);
 
+        //Заполняем страницу данными
         new LogInPage(driver)
                 .logInByUser()
                 .setPrivateDataInfo()
@@ -66,13 +62,15 @@ public class OtusHomeworkTest {
 
         driver.close();
         driver = WebDriverFactory.create(type, null);
-        LogInPage logInPage = new LogInPage(driver);
-        logInPage.logInByUser();
+        //проверяем заполненность страницы
+        checkData();
+    }
 
-        //выполняем проверки
-        CheckHelper checkHelper = new CheckHelper(driver);
-        checkHelper.checkPrivateDataInfo();
-        checkHelper.checkMainInfo();
-        checkHelper.checkContactInfo();
+    private void checkData() {
+        new LogInPage(driver)
+                .logInByUser()
+                .checkPrivateDataInfo()
+                .checkMainInfo()
+                .checkContactInfo();
     }
 }

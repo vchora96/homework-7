@@ -12,6 +12,7 @@ public abstract class BasePage {
     private static final Logger logger = LogManager.getLogger(BasePage.class.getName());
 
     protected WebDriver driver;
+    //получаем свойство, определенное JVM (либо сам JVM, либо любые опции -D)
     private final String baseUrl = System.getProperty("url", "https://otus.ru");
 
     @FindBy(xpath = "//button[@data-modal-id='new-log-reg']")

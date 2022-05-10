@@ -13,6 +13,8 @@ import ru.oshkin.util.constants.LanguageLevel;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MainPage extends BasePage {
     private static final Logger logger = LogManager.getLogger(MainPage.class.getName());
 
@@ -39,6 +41,16 @@ public class MainPage extends BasePage {
         clickCity();
         clickLanguageLevel();
         choseLanguageLevel();
+
+        return new ContactInfoPage(driver);
+    }
+
+    public ContactInfoPage checkMainInfo() {
+        assertEquals(Country.UZBEKISTAN.getCountry(), driver.findElement(By.xpath("//input[@name ='country']/following-sibling::div")).getText());
+        assertEquals(City.ANGREN.getCityName(), driver.findElement(By.xpath("//input[@name ='city']/" +
+                "following-sibling::div")).getText());
+        assertEquals(LanguageLevel.Elementary.getDescription(), driver.findElement(By.xpath("//input[@name ='english_level']/" +
+                "following-sibling::div")).getText());
 
         return new ContactInfoPage(driver);
     }
