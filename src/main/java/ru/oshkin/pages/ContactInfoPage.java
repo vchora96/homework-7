@@ -20,8 +20,8 @@ public class ContactInfoPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(ContactInfoPage.class.getName());
 
-    public static final String PHONE_NUMBER = "+7 966 666-66-66";
-    public static final String SKYPE_LOGIN = "SKYPE-TEST-LOGIN";
+    private ArrayList<Contact> contacts;
+    private String phoneNumber;
 
     private String contactLocator = ".js-custom-select-options-container:not(.hide)" +
             " button[title='%s']";
@@ -62,7 +62,13 @@ public class ContactInfoPage extends BasePage {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    public void setContactInfo() {
+    public void init(String phoneNumber, ArrayList<Contact> contacts) {
+        this.phoneNumber = phoneNumber;
+        this.contacts = contacts;
+    }
+
+    public void setContactInfo(String phoneNumber, ArrayList<Contact> contacts) {
+        init(phoneNumber, contacts);
         clickPhone();
         setPhone();
         clickSendButton();
@@ -89,10 +95,10 @@ public class ContactInfoPage extends BasePage {
             strings.add(text);
         }
 
-        boolean isPhoneContains = strings.contains(PHONE_NUMBER);
+        boolean isPhoneContains = strings.contains(phoneNumber);
         assertTrue(isPhoneContains);
 
-        boolean isSkypeLoginContains = strings.contains(SKYPE_LOGIN);
+        boolean isSkypeLoginContains = strings.contains(contacts.get(0).getType());
         assertTrue(isSkypeLoginContains);
     }
 
@@ -133,7 +139,7 @@ public class ContactInfoPage extends BasePage {
 
     private void setPhone() {
         numberPhone.clear();
-        numberPhone.sendKeys(PHONE_NUMBER);
+        numberPhone.sendKeys(phoneNumber);
         logger.info("Заполнили номер телефона");
     }
 
@@ -148,10 +154,7 @@ public class ContactInfoPage extends BasePage {
     }
 
     private void setContacts() {
-        ArrayList<Contact> contacts = new ArrayList<>();
-        contacts.add(new Contact("Skype", SKYPE_LOGIN));
-        contacts.add(new Contact("Viber", PHONE_NUMBER));
-        addContacts(contacts);
+        addContacts(this.contacts);
         logger.info("Два контакта успешно заполнены");
     }
 

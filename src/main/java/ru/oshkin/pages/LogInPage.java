@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LogInPage extends BasePage {
 
     private static final Logger logger = LogManager.getLogger(LogInPage.class.getName());
-    private final String login = System.getProperty("login", "macorax714@idurse.com");
-    private final String pass = System.getProperty("pass", "********"); //пароль от тестовой УЗ
+    private String login;
+    private String pass;
 
     @FindBy(xpath = "//input[@type='text' and @placeholder='Электронная почта']")
     private WebElement mail;
@@ -45,7 +45,13 @@ public class LogInPage extends BasePage {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    public PersonalDataPage logInByUser() {
+    private void init(String login, String pass){
+        this.login = login;
+        this.pass = pass;
+    }
+
+    public PersonalDataPage logInByUser(String login, String pass) {
+        init(login, pass);
         openSite();
 
         closeChat();

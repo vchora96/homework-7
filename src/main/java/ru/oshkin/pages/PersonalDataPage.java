@@ -17,15 +17,28 @@ public class PersonalDataPage extends BasePage {
 
     private final String fieldFormLocator = "//input[@name='%s']";
 
-    public static final String NAME = "Жора";
-    public static final String BLOG_NAME = "Жора";
-    public static final String LATIN_NAME = "George";
+    public String name;
+    public String blogName;
+    public String latinName;
 
-    public static final String SECOND_NAME = "Иванов";
-    public static final String LATIN_SECOND_NAME = "Ivanov";
+    public String secondName;
+    public String latinSecondName;
 
-    public static final String DATE_OF_BIRTH = "13.11.2001";
+    public String dateOfBirth;
 
+    public void init(String name,
+                     String blogName,
+                     String latinName,
+                     String secondName,
+                     String latinSecondName,
+                     String dateOfBirth) {
+        this.name = name;
+        this.blogName = blogName;
+        this.latinName = latinName;
+        this.secondName = secondName;
+        this.latinSecondName = latinSecondName;
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public PersonalDataPage(WebDriver driver) {
         super(driver);
@@ -33,7 +46,13 @@ public class PersonalDataPage extends BasePage {
         driver.manage().timeouts().implicitlyWait(5, SECONDS);
     }
 
-    public MainPage setPrivateDataInfo() {
+    public MainPage setPersonalDataInfo(String name,
+                                        String blogName,
+                                        String latinName,
+                                        String secondName,
+                                        String latinSecondName,
+                                        String dateOfBirth) {
+        init(name, blogName, latinName, secondName, latinSecondName, dateOfBirth);
         setName();
         setLatinName();
         setSecondName();
@@ -41,16 +60,17 @@ public class PersonalDataPage extends BasePage {
         setBlogName();
         setDateOfBirth();
 
+
         return new MainPage(driver);
     }
 
     public MainPage checkPrivateDataInfo() {
-        assertEquals(NAME, driver.findElement(By.xpath(String.format(fieldFormLocator, "fname"))).getAttribute("value"));
-        assertEquals(LATIN_NAME, driver.findElement(By.xpath(String.format(fieldFormLocator, "fname_latin"))).getAttribute("value"));
-        assertEquals(SECOND_NAME, driver.findElement(By.xpath(String.format(fieldFormLocator, "lname"))).getAttribute("value"));
-        assertEquals(LATIN_SECOND_NAME, driver.findElement(By.xpath(String.format(fieldFormLocator, "lname_latin"))).getAttribute("value"));
-        assertEquals(BLOG_NAME, driver.findElement(By.xpath(String.format(fieldFormLocator, "blog_name"))).getAttribute("value"));
-        assertEquals(DATE_OF_BIRTH, driver.findElement(By.xpath(String.format(fieldFormLocator, "date_of_birth"))).getAttribute("value"));
+        assertEquals(name, driver.findElement(By.xpath(String.format(fieldFormLocator, "fname"))).getAttribute("value"));
+        assertEquals(latinName, driver.findElement(By.xpath(String.format(fieldFormLocator, "fname_latin"))).getAttribute("value"));
+        assertEquals(secondName, driver.findElement(By.xpath(String.format(fieldFormLocator, "lname"))).getAttribute("value"));
+        assertEquals(latinSecondName, driver.findElement(By.xpath(String.format(fieldFormLocator, "lname_latin"))).getAttribute("value"));
+        assertEquals(blogName, driver.findElement(By.xpath(String.format(fieldFormLocator, "blog_name"))).getAttribute("value"));
+        assertEquals(dateOfBirth, driver.findElement(By.xpath(String.format(fieldFormLocator, "date_of_birth"))).getAttribute("value"));
 
         return new MainPage(driver);
     }
@@ -58,42 +78,42 @@ public class PersonalDataPage extends BasePage {
     private void setName() {
         WebElement name = driver.findElement(By.xpath(String.format(fieldFormLocator, "fname")));
         name.clear();
-        name.sendKeys(NAME);
+        name.sendKeys(this.name);
         logger.info("Очищаем поле: name и вводим новое поле: name");
     }
 
     private void setLatinName() {
         WebElement latinName = driver.findElement(By.xpath(String.format(fieldFormLocator, "fname_latin")));
         latinName.clear();
-        latinName.sendKeys(LATIN_NAME);
+        latinName.sendKeys(this.latinName);
         logger.info("Очищаем поле: latin name и вводим новое поле: latin name");
     }
 
     private void setSecondName() {
         WebElement secondName = driver.findElement(By.xpath(String.format(fieldFormLocator, "lname")));
         secondName.clear();
-        secondName.sendKeys(SECOND_NAME);
+        secondName.sendKeys(this.secondName);
         logger.info("Очищаем поле: secondName и вводим новое поле: secondName");
     }
 
     private void setLatinSecondName() {
         WebElement latinSecondName = driver.findElement(By.xpath(String.format(fieldFormLocator, "lname_latin")));
         latinSecondName.clear();
-        latinSecondName.sendKeys(LATIN_SECOND_NAME);
+        latinSecondName.sendKeys(this.latinSecondName);
         logger.info("Очищаем поле: latinSecondName и вводим новое поле: latinSecondName");
     }
 
     private void setBlogName() {
         WebElement blogName = driver.findElement(By.xpath(String.format(fieldFormLocator, "blog_name")));
         blogName.clear();
-        blogName.sendKeys(BLOG_NAME);
+        blogName.sendKeys(this.blogName);
         logger.info("Очищаем поле: blogName и вводим новое поле: blogName");
     }
 
     private void setDateOfBirth() {
         WebElement dateOfBirth = driver.findElement(By.xpath(String.format(fieldFormLocator, "date_of_birth")));
         dateOfBirth.clear();
-        dateOfBirth.sendKeys(DATE_OF_BIRTH);
+        dateOfBirth.sendKeys(this.dateOfBirth);
         logger.info("Очищаем поле: dateOfBirth и вводим новое поле: dateOfBirth");
 
         dateOfBirth.click();

@@ -27,15 +27,25 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//input[@data-title ='Уровень знания английского языка']/following-sibling::div")
     private WebElement levelLanguage;
 
+    private City testCity;
+
+    private LanguageLevel level;
+
     public MainPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    public ContactInfoPage setMainInfo() {
+    private void init(City city, LanguageLevel level) {
+        this.testCity = city;
+        this.level = level;
+    }
+
+    public ContactInfoPage setMainInfo(City city, LanguageLevel level) {
+        init(city, level);
         clickCountries();
-        choseResidencePlace(City.ANGREN);
+        choseResidencePlace(this.testCity);
         clickLanguageLevel();
         choseLanguageLevel();
 
@@ -43,17 +53,17 @@ public class MainPage extends BasePage {
     }
 
     public ContactInfoPage checkMainInfo() {
-        assertEquals(City.ANGREN.getCountry(), driver.findElement(By.xpath("//input[@name ='country']/following-sibling::div")).getText());
-        assertEquals(City.ANGREN.getCityName(), driver.findElement(By.xpath("//input[@name ='city']/" +
+        assertEquals(this.testCity.getCountry(), driver.findElement(By.xpath("//input[@name ='country']/following-sibling::div")).getText());
+        assertEquals(this.testCity.getCityName(), driver.findElement(By.xpath("//input[@name ='city']/" +
                 "following-sibling::div")).getText());
-        assertEquals(LanguageLevel.Elementary.getDescription(), driver.findElement(By.xpath("//input[@name ='english_level']/" +
+        assertEquals(this.level.getDescription(), driver.findElement(By.xpath("//input[@name ='english_level']/" +
                 "following-sibling::div")).getText());
 
         return new ContactInfoPage(driver);
     }
 
     private void choseLanguageLevel() {
-        selectLanguageLevel(LanguageLevel.Elementary).click();
+        selectLanguageLevel(this.level).click();
         logger.info("Кликаем на начальный уровень английского языка");
     }
 
