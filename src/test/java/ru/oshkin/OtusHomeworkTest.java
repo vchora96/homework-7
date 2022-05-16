@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import ru.oshkin.pages.LogInPage;
 import ru.oshkin.util.Contact;
+import ru.oshkin.util.ContactType;
 import ru.oshkin.util.WebBrowserType;
 import ru.oshkin.factory.WebDriverFactory;
 import ru.oshkin.util.constants.City;
@@ -30,15 +31,19 @@ public class OtusHomeworkTest {
     public final String DATE_OF_BIRTH = "13.11.2001";
 
     private final String login = System.getProperty("login", "macorax714@idurse.com");
-    private final String pass = System.getProperty("pass", "********"); //пароль от тестовой УЗ
+    private final String pass = System.getProperty("pass", "Test12345"); //пароль от тестовой УЗ
 
     public static final String PHONE_NUMBER = "+7 966 666-66-66";
     public static final String SKYPE_LOGIN = "SKYPE-TEST-LOGIN";
 
+    private final ArrayList<Contact> contacts = new ArrayList<>();
+
     @BeforeEach
     public void startUp() {
-        String envVariable = System.getProperty("browser", "MOZILLA");
+        String envVariable = System.getProperty("browser", "CHrome");
         this.type = WebBrowserType.valueOf(envVariable.toUpperCase(Locale.ROOT));
+        contacts.add(new Contact(ContactType.SKYPE, SKYPE_LOGIN));
+        contacts.add(new Contact(ContactType.VIBER, PHONE_NUMBER));
     }
 
     @AfterEach
@@ -51,10 +56,6 @@ public class OtusHomeworkTest {
     @Test
     public void setPrivetDataOtusTest() {
         driver = WebDriverFactory.create(type, null);
-
-        ArrayList<Contact> contacts = new ArrayList<>();
-        contacts.add(new Contact("Skype", SKYPE_LOGIN));
-        contacts.add(new Contact("Viber", PHONE_NUMBER));
 
         //Заполняем страницу данными
         new LogInPage(driver)
@@ -75,10 +76,6 @@ public class OtusHomeworkTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("headless");
         driver = WebDriverFactory.create(type, options);
-
-        ArrayList<Contact> contacts = new ArrayList<>();
-        contacts.add(new Contact("Skype", SKYPE_LOGIN));
-        contacts.add(new Contact("Viber", PHONE_NUMBER));
 
         //Заполняем страницу данными
         new LogInPage(driver)

@@ -79,27 +79,13 @@ public class ContactInfoPage extends BasePage {
     }
 
     public void checkContactInfo() {
-        String skypeSelector = format(contactLocator, "Skype");
-        WebElement skype = driver.findElement(By.cssSelector(skypeSelector));
-        boolean skypeEnabled = skype.isEnabled();
-        assertTrue(skypeEnabled);
-
-        String viberSelector = format(contactLocator, "Viber");
-        WebElement viber = driver.findElement(By.cssSelector(viberSelector));
-        boolean viberEnabled = viber.isEnabled();
-        assertTrue(viberEnabled);
-
-        ArrayList<String> strings = new ArrayList<>();
-        for (WebElement contact : communicationValueWays) {
-            String text = contact.getAttribute("value");
-            strings.add(text);
+        for (Contact contact : contacts) {
+            String text = contact.getType().getText(); //получаем описание типа контакта Viber, Skype, Vk
+            String contactLocator = format(this.contactLocator, text);
+            WebElement elemEnabled = driver.findElement(By.cssSelector(contactLocator));
+            boolean contactEnabled = elemEnabled.isEnabled();
+            assertTrue(contactEnabled);
         }
-
-        boolean isPhoneContains = strings.contains(phoneNumber);
-        assertTrue(isPhoneContains);
-
-        boolean isSkypeLoginContains = strings.contains(contacts.get(0).getType());
-        assertTrue(isSkypeLoginContains);
     }
 
     private void openBlock() {

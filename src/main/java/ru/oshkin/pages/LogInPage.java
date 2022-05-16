@@ -54,7 +54,7 @@ public class LogInPage extends BasePage {
         init(login, pass);
         openSite();
 
-        closeChat();
+       // closeChat();
 
         setLogin();
         setPassword();
@@ -78,7 +78,7 @@ public class LogInPage extends BasePage {
         mail.click();
         mail.sendKeys(login);
         logger.info("Ввели почту");
-        String text = mail.getText();
+        String text = mail.getAttribute("value");
         assertEquals(login, text);
     }
 
@@ -86,7 +86,7 @@ public class LogInPage extends BasePage {
         password.click();
         password.sendKeys(pass);
         logger.info("Ввели пароль");
-        String text = password.getText();
+        String text = password.getAttribute("value");
         assertEquals(pass, text);
     }
 
