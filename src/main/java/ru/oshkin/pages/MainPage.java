@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ru.oshkin.util.constants.City;
 import ru.oshkin.util.constants.LanguageLevel;
@@ -52,7 +51,8 @@ public class MainPage extends BasePage {
         return new ContactInfoPage(driver);
     }
 
-    public ContactInfoPage checkMainInfo() {
+    public ContactInfoPage checkMainInfo(City city, LanguageLevel level) {
+        init(city, level);
         assertEquals(this.testCity.getCountry(), driver.findElement(By.xpath("//input[@name ='country']/following-sibling::div")).getText());
         assertEquals(this.testCity.getCityName(), driver.findElement(By.xpath("//input[@name ='city']/" +
                 "following-sibling::div")).getText());
@@ -73,7 +73,6 @@ public class MainPage extends BasePage {
     }
 
     private void clickCity(City city) {
-        //todo: иногда не удается кликнуть на город, так как на предыдущем шаге не всплывает окно
         WebElement selectCity = selectCity(city);
         selectCity.click();
         logger.info("Кликаем на город");

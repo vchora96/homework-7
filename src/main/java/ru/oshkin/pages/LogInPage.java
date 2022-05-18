@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -53,7 +52,7 @@ public class LogInPage extends BasePage {
         init(login, pass);
         openSite();
 
-       // closeChat();
+        closeChat();
 
         setLogin();
         setPassword();
@@ -67,9 +66,13 @@ public class LogInPage extends BasePage {
     }
 
     private void closeChat() {
-        if (chatCross.isDisplayed()) {
-            chatCross.click();
-            logger.info("Закрываем всплывающее окно чата");
+        try {
+            if (chatCross.isDisplayed()) {
+                chatCross.click();
+                logger.info("Закрываем всплывающее окно чата");
+            }
+        }catch (Exception ex){
+            logger.error("Не удалось закрыть чат", ex);
         }
     }
 

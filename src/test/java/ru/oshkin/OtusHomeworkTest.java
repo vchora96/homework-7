@@ -93,8 +93,8 @@ public class OtusHomeworkTest {
     private void checkData() {
         new LogInPage(driver)
                 .logInByUser(this.login, this.pass)
-                .checkPrivateDataInfo()
-                .checkMainInfo()
-                .checkContactInfo();
+                .checkPersonalDataInfo(NAME, BLOG_NAME, LATIN_NAME, SECOND_NAME, LATIN_SECOND_NAME, DATE_OF_BIRTH)
+                .checkMainInfo(City.ANGREN, LanguageLevel.Beginner)
+                .checkContactInfo(PHONE_NUMBER, contacts);
     }
 }

@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -63,7 +62,13 @@ public class PersonalDataPage extends BasePage {
         return new MainPage(driver);
     }
 
-    public MainPage checkPrivateDataInfo() {
+    public MainPage checkPersonalDataInfo(String name,
+                                          String blogName,
+                                          String latinName,
+                                          String secondName,
+                                          String latinSecondName,
+                                          String dateOfBirth) {
+        init(name, blogName, latinName, secondName, latinSecondName, dateOfBirth);
         assertEquals(name, driver.findElement(By.xpath(String.format(fieldFormLocator, "fname"))).getAttribute("value"));
         assertEquals(latinName, driver.findElement(By.xpath(String.format(fieldFormLocator, "fname_latin"))).getAttribute("value"));
         assertEquals(secondName, driver.findElement(By.xpath(String.format(fieldFormLocator, "lname"))).getAttribute("value"));

@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import ru.oshkin.util.Contact;
 
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ public class ContactInfoPage extends BasePage {
 
     private ArrayList<Contact> contacts;
     private String phoneNumber;
+    private final String filledContactLocator = " button[title='%s']";
 
     private String contactLocator = ".js-custom-select-options-container:not(.hide)" +
             " button[title='%s']";
@@ -77,10 +77,11 @@ public class ContactInfoPage extends BasePage {
         exitProfile();
     }
 
-    public void checkContactInfo() {
+    public void checkContactInfo(String phoneNumber, ArrayList<Contact> contacts) {
+        init(phoneNumber, contacts);
         for (Contact contact : contacts) {
             String text = contact.getType().getText(); //получаем описание типа контакта Viber, Skype, Vk
-            String contactLocator = format(this.contactLocator, text);
+            String contactLocator = format(this.filledContactLocator, text);
             WebElement elemEnabled = driver.findElement(By.cssSelector(contactLocator));
             boolean contactEnabled = elemEnabled.isEnabled();
             assertTrue(contactEnabled);
