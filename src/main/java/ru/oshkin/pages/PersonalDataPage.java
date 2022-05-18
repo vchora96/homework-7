@@ -42,7 +42,6 @@ public class PersonalDataPage extends BasePage {
 
     public PersonalDataPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
         driver.manage().timeouts().implicitlyWait(5, SECONDS);
     }
 

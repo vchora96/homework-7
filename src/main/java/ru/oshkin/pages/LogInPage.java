@@ -41,7 +41,6 @@ public class LogInPage extends BasePage {
 
     public LogInPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 

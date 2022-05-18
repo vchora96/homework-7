@@ -29,7 +29,7 @@ public class ContactInfoPage extends BasePage {
     @FindBy(xpath = "//button[contains(text(),'Указать телефон')]")
     private WebElement phone;
 
-    @FindBy(xpath = "//Input[@name ='phone' and @placeholder ='Номер телефона']")
+    @FindBy(xpath = "//input[@name ='phone' and @placeholder ='Номер телефона']")
     private WebElement numberPhone;
 
     @FindBy(xpath = "//button[contains(text(),'Отправить')]")
@@ -58,7 +58,6 @@ public class ContactInfoPage extends BasePage {
 
     public ContactInfoPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
@@ -104,12 +103,12 @@ public class ContactInfoPage extends BasePage {
             communicationWay.click();
             logger.info("Кликаем на способ связи");
 
-            WebElement contactWebElem = driver.findElement(By.cssSelector(format(contactLocator, contact.getType())));
+            WebElement contactWebElem = driver.findElement(By.cssSelector(format(contactLocator, contact.getType().getText())));
             contactWebElem.click();
-            logger.info(format("Выбираем способ связи %s", contact.getType()));
+            logger.info(format("Выбираем способ связи %s", contact.getType().getText()));
 
             for (WebElement element : communicationValueWays) {//проходимся по правой колонке = содержимому
-                String text = element.getAttribute("contact");
+                String text = element.getAttribute("value");
                 if (text.length() == 0) { //как только нашли пустое поле
                     element.sendKeys(contact.getValue());
                     element.click();
